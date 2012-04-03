@@ -1,11 +1,7 @@
 from django.conf.urls import patterns, include, url
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
-
-urlpatterns = patterns('',
-    url(r'', include('main.urls')),
+urlpatterns = patterns('main.views',
+    url(r'^foursquare/push/', 'foursquare_push'),
     # Examples:
     # url(r'^$', 'whereami.views.home', name='home'),
     # url(r'^whereami/', include('whereami.foo.urls')),
