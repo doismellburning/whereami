@@ -155,3 +155,5 @@ LOGGING = {
         },
     }
 }
+
+FOURSQUARE_PUSH_SECRET = os.getenv('FOURSQUARE_PUSH_SECRET')
