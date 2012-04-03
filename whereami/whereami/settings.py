@@ -6,7 +6,7 @@ DEBUG = bool(os.getenv("DJANGO_DEBUG", False))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Kristian Glass', 'whereami@moorhensolutions.co.uk'),
 )
 
 MANAGERS = ADMINS
