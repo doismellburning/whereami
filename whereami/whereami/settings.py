@@ -160,6 +160,7 @@ FOURSQUARE_PUSH_SECRET = os.getenv('FOURSQUARE_PUSH_SECRET')
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 if os.getenv('SENDGRID_USERNAME') is not None:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.sendgrid.net'
     EMAIL_HOST_USER = os.getenv('SENDGRID_USERNAME')
     EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_PASSWORD')
