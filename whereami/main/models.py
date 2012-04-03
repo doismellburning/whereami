@@ -1,3 +1,8 @@
-from django.db import models
+from mongoengine import *
 
-# Create your models here.
+class Checkin(DynamicDocument):
+    pass
+
+class LatestCheckin(Document):
+    user_id = IntField()
+    checkin = ReferenceField(Checkin)
