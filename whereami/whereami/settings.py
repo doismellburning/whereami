@@ -1,6 +1,8 @@
 # Django settings for whereami project.
 
-DEBUG = True
+import os
+
+DEBUG = bool(os.getenv("DJANGO_DEBUG", False))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
