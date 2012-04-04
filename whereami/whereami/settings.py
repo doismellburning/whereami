@@ -157,6 +157,7 @@ LOGGING = {
 }
 
 FOURSQUARE_PUSH_SECRET = os.getenv('FOURSQUARE_PUSH_SECRET')
+FOURSQUARE_USER_ID = int(os.getenv('FOURSQUARE_USER_ID', 1))
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 if os.getenv('SENDGRID_USERNAME') is not None:

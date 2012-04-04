@@ -28,3 +28,25 @@ def foursquare_push(request):
     latest_checkin.save()
 
     return HttpResponse()
+
+def whereami(request):
+    user_id = int(request.GET.get('user', settings.FOURSQUARE_USER_ID))
+
+    checkin = LatestCheckin.objects.get(user_id=user_id).checkin
+
+    return HttpResponse(json.dumps(checkin, default=_json_encode))
+
+def _json_encode(obj):
+    from bson import ObjectId
+    from mongoengine import Document, EmbeddedDocument
+
+    if isinstance(obj, (Document, EmbeddedDocument)):
+        out = dict(obj._data)
+        for k,v in out.items():
+            if isinstance(v, ObjectId):
+                out[k] = str(v)
+    else:
+        raise TypeError, "Could not JSON-encode type '%s': %s" % (type(obj),
+str(obj))
+    return out
+
