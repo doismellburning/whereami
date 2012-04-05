@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.mail import mail_admins
 from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
@@ -50,3 +51,5 @@ def _json_encode(obj):
 str(obj))
     return out
 
+def home(request):
+    return render(request, 'map.html')
