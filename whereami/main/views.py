@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.core.mail import mail_admins
-from django.http import HttpResponse, HttpResponseForbidden
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
 from main.models import *
+import urllib2
 
 logger = logging.getLogger(__name__)
 
@@ -53,3 +55,23 @@ str(obj))
 
 def home(request):
     return render(request, 'map.html')
+
+def foursquare_oauth(request):
+    url = 'https://foursquare.com/oauth2/authenticate?client_id={client_id}&response_type=code&redirect_uri={redirect_uri}'.format(client_id=settings.FOURSQUARE_CLIENT_ID, redirect_uri=settings.FOURSQUARE_CALLBACK_URL)
+    mail_admins('Auth', url)
+    return HttpResponseRedirect(url)
+
+def foursquare_callback(request):
+    code = request.GET.get('code')
+    url = "https://foursquare.com/oauth2/access_token?client_id={client_id}&client_secret={client_secret}&grant_type=authorization_code&redirect_uri={redirect_uri}&code={code}".format(client_id=settings.FOURSQUARE_CLIENT_ID, client_secret=settings.FOURSQUARE_CLIENT_SECRET, redirect_uri=settings.FOURSQUARE_CALLBACK_URL, code=code)
+    mail_admins('Callback', url)
+
+    #Optimism, but this is a one-off process just for me, saving me doing a manual curl
+    f = urllib2.urlopen(url)
+    response = f.read()
+    j = json.loads(response)
+    access_token = j['access_token']
+    #Consider saving? But don't really care - just want push
+
+    logger.info(access_token)
+    return HttpResponseRedirect(reverse('home'))

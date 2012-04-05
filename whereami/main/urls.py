@@ -6,6 +6,8 @@ urlpatterns = patterns('main.views',
     url(r'^favicon.ico$', RedirectView.as_view(url='http://example.com/favicon.ico', permanent=False)),
     url(r'^foursquare/push/', 'foursquare_push'),
     url(r'^whereami/$', 'whereami', name='whereami'),
+    url(r'^foursquare/oauth/$', 'foursquare_oauth'),
+    url(r'^foursquare/callback/$', 'foursquare_callback'),
     # Examples:
     # url(r'^$', 'whereami.views.home', name='home'),
     # url(r'^whereami/', include('whereami.foo.urls')),
