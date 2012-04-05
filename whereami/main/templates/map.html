@@ -1,18 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<div id="loading">
+		<h1>Loading...</h1>
+	</div>
+	<div id="description" style="display: none;">
+		<h1><span id="name">Name</span> @ <span id="location">Location</span> @ <span id="time">Time</span></h1>
+	</div>
 	<div id="demoMap" style="height:100%"></div>
 	<div class="whereami_url" style="display: none" data-url="{% url whereami %}"></div>
 	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="https://raw.github.com/phstc/jquery-dateFormat/master/jquery.dateFormat-1.0.js"></script>
 	<script>
 		$(document).ready(function() {
-			map = new OpenLayers.Map("demoMap");
-			map.addLayer(new OpenLayers.Layer.OSM());
-			map.zoomToMaxExtent();
-
 			var url = $(".whereami_url").data("url");
 			$.getJSON(url, function(data) {
+				map = new OpenLayers.Map("demoMap");
+				map.addLayer(new OpenLayers.Layer.OSM());
+
 				// http://wiki.openstreetmap.org/wiki/OpenLayers_Marker
 
 				var location = data["venue"]["location"];
@@ -31,6 +37,12 @@
 				var icon = new OpenLayers.Icon(data["user"]["photo"], size);
 				markers.addMarker(new OpenLayers.Marker(lonLat, icon));
 				map.setCenter (lonLat, zoom);
+
+				$("#name").text(data["user"]["firstName"]);
+				$("#location").text(data["venue"]["name"]);
+				$("#time").text($.format.date(data["createdAt"], 'hh:mm:ss on ddd dd/MM/yyyy'));
+				$("#loading").hide();
+				$("#description").show();
 			});
 		});
 	</script>
