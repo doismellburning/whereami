@@ -6,3 +6,7 @@ class Checkin(DynamicDocument):
 class LatestCheckin(Document):
     user_id = IntField()
     checkin = ReferenceField(Checkin)
+
+class Visit(Document):
+    username = StringField()
+    when = DateTimeField()

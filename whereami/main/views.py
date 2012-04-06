@@ -1,4 +1,6 @@
+from datetime import datetime
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
@@ -32,7 +34,10 @@ def foursquare_push(request):
 
     return HttpResponse()
 
+@login_required
 def whereami(request):
+    Visit.objects.create(username=request.user.username, when=datetime.now())
+
     user_id = int(request.GET.get('user', settings.FOURSQUARE_USER_ID))
 
     checkin = LatestCheckin.objects.get(user_id=user_id).checkin
@@ -53,6 +58,7 @@ def _json_encode(obj):
 str(obj))
     return out
 
+@login_required
 def home(request):
     return render(request, 'map.html')
 

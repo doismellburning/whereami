@@ -5,6 +5,8 @@ import os
 DEBUG = bool(os.getenv("DJANGO_DEBUG", False))
 TEMPLATE_DEBUG = DEBUG
 
+PROJECT_DIR = os.path.dirname(__file__)
+
 ADMINS = (
     ('Kristian Glass', 'whereami@moorhensolutions.co.uk'),
 )
@@ -13,8 +15,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(PROJECT_DIR, 'db.sqlite3'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -124,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_openid_auth',
     'main',
 )
 
@@ -174,3 +177,11 @@ if os.getenv('SENDGRID_USERNAME') is not None:
 if 'MONGOLAB_URI' in os.environ:
     import mongoengine
     mongoengine.connect('', host=os.environ['MONGOLAB_URI'])
+
+AUTHENTICATION_BACKENDS = (
+    'main.auth.GoogleBackend',
+)
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/logout/'
+OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'

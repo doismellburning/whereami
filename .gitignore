@@ -1,5 +1,7 @@
 /bin
+/build
 /include
 /lib
 /.Python
 *.pyc
+db.sqlite3
