@@ -1,6 +1,7 @@
 # Django settings for whereami project.
 
 import os
+import urlparse
 
 DEBUG = bool(os.getenv("DJANGO_DEBUG", False))
 TEMPLATE_DEBUG = DEBUG
@@ -185,3 +186,17 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
 OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
+
+
+if 'DATABASE_URL' in os.environ:
+    urlparse.uses_netloc.append('postgres')
+    url = urlparse.urlparse(os.environ['DATABASE_URL'])
+    DATABASES['default'].update({
+        'NAME': url.path[1:],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+    })
+    if url.scheme == 'postgres':
+        DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
