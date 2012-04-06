@@ -36,7 +36,7 @@ def foursquare_push(request):
 
 @login_required
 def whereami(request):
-    Visit.objects.create(username=request.user.username, when=datetime.now())
+    Visit.objects.create(username=request.user.email, when=datetime.now())
 
     user_id = int(request.GET.get('user', settings.FOURSQUARE_USER_ID))
 
