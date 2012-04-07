@@ -10,3 +10,4 @@ class LatestCheckin(Document):
 class Visit(Document):
     username = StringField()
     when = DateTimeField()
+    checkin = ReferenceField(Checkin)
