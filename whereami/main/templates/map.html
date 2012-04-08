@@ -40,7 +40,7 @@
 
 				$("#name").text(data["user"]["firstName"]);
 				$("#location").text(data["venue"]["name"]);
-				$("#time").text($.format.date(data["createdAt"] * 1000, 'hh:mm:ss on ddd dd/MM/yyyy'));
+				$("#time").text($.format.date(data["createdAt"] * 1000, 'HH:mm:ss on ddd dd/MM/yyyy'));
 				$("#loading").hide();
 				$("#description").show();
 			});
