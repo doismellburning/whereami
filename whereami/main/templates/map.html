@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load url from future %}
+
 {% block content %}
 	<div id="loading">
 		<h1>Loading...</h1>
@@ -8,7 +10,7 @@
 		<h1><span id="name">Name</span> last seen at <span id="location">Location</span> @ <span id="time">Time</span></h1>
 	</div>
 	<div id="demoMap" style="height:100%"></div>
-	<div class="whereami_url" style="display: none" data-url="{% url whereami %}"></div>
+	<div class="whereami_url" style="display: none" data-url="{% url 'whereami' %}"></div>
 	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="https://raw.github.com/phstc/jquery-dateFormat/master/jquery.dateFormat-1.0.js"></script>
