@@ -39,8 +39,12 @@ def whereami(request):
     user_id = int(request.GET.get('user', settings.FOURSQUARE_USER_ID))
 
     checkin = LatestCheckin.objects.get(user_id=user_id).checkin
+    visitor = request.user.email
+    visit_at = datetime.now()
 
-    Visit.objects.create(username=request.user.email, when=datetime.now(), checkin=checkin)
+    Visit.objects.create(username=visitor, when=visit_at, checkin=checkin)
+
+    mail_admins("Where Are You? by %s" % visitor, "%s saw you were at %s at %s" % (visitor, checkin.venue['name'], visit_at))
 
     return HttpResponse(json.dumps(checkin, default=_json_encode))
 

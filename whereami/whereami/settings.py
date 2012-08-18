@@ -175,6 +175,9 @@ if os.getenv('SENDGRID_USERNAME') is not None:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
 
+EMAIL_SUBJECT_PREFIX="[whereami] "
+SERVER_EMAIL="whereami_server@doismellburning.co.uk"
+
 if 'MONGOLAB_URI' in os.environ:
     import mongoengine
     mongoengine.connect('', host=os.environ['MONGOLAB_URI'])
