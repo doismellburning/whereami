@@ -1,7 +1,8 @@
 Django==1.4.1
 django-openid-auth==0.4
-mongoengine==0.6.3
+mongoengine==0.6.20
 psycopg2==2.4.5
-pymongo==2.1.1
+pymongo==2.2.1
 python-openid==2.2.5
+virtualenv==1.7.2
 wsgiref==0.1.2
