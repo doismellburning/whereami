@@ -182,14 +182,6 @@ if 'MONGOLAB_URI' in os.environ:
     import mongoengine
     mongoengine.connect('', host=os.environ['MONGOLAB_URI'])
 
-AUTHENTICATION_BACKENDS = (
-    'main.auth.GoogleBackend',
-)
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/logout/'
-OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
-
 
 if 'DATABASE_URL' in os.environ:
     urlparse.uses_netloc.append('postgres')

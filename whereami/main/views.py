@@ -34,17 +34,17 @@ def foursquare_push(request):
 
     return HttpResponse()
 
-@login_required
 def whereami(request):
     user_id = int(request.GET.get('user', settings.FOURSQUARE_USER_ID))
 
     checkin = LatestCheckin.objects.get(user_id=user_id).checkin
-    visitor = request.user.email
-    visit_at = datetime.now()
 
-    Visit.objects.create(username=visitor, when=visit_at, checkin=checkin)
+    # visitor = request.user.email
+    # visit_at = datetime.now()
 
-    mail_admins("Where Are You? by %s" % visitor, "%s saw you were at %s at %s" % (visitor, checkin.venue['name'], visit_at))
+    # Visit.objects.create(username=visitor, when=visit_at, checkin=checkin)
+
+    # mail_admins("Where Are You? by %s" % visitor, "%s saw you were at %s at %s" % (visitor, checkin.venue['name'], visit_at))
 
     return HttpResponse(json.dumps(checkin, default=_json_encode))
 
@@ -62,7 +62,6 @@ def _json_encode(obj):
 str(obj))
     return out
 
-@login_required
 def home(request):
     return render(request, 'map.html')
 
