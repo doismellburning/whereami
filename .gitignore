@@ -3,5 +3,7 @@
 /include
 /lib
 /.Python
+/.coverage
+/.tox
 *.pyc
 db.sqlite3
