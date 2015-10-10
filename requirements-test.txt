@@ -1,2 +1,2 @@
-coverage==4.0a6
+coverage==4.0
 flake8==2.4.1
