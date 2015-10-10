@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'django_openid_auth',
+    'social_auth',
     'main',
 )
 
@@ -183,7 +183,7 @@ if 'MONGOLAB_URI' in os.environ:
     mongoengine.connect('', host=os.environ['MONGOLAB_URI'])
 
 AUTHENTICATION_BACKENDS = (
-    'main.auth.GoogleBackend',
+    'social_auth.backends.OpenIDBackend',
 )
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
