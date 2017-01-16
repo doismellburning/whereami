@@ -1,5 +1,5 @@
 Django==1.10.5
-django-openid-auth==0.11
+django-openid-auth==0.12
 mongoengine==0.11.0
 psycopg2==2.6.2
 pymongo==3.4.0
