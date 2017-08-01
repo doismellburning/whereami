@@ -1,4 +1,4 @@
-Django==1.11.3
+Django==1.11.4
 django-openid-auth==0.14
 mongoengine==0.13.0
 psycopg2==2.7.3
