@@ -1,7 +1,7 @@
 Django==1.11.4
 django-openid-auth==0.14
 mongoengine==0.13.0
-psycopg2==2.7.3
+psycopg2==2.7.3.1
 pymongo==3.5.1
 python-openid==2.2.5
 wsgiref==0.1.2
